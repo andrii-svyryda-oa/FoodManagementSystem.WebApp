@@ -8,13 +8,13 @@ import useNotification from "antd/es/notification/useNotification";
 import { useEffect } from "react";
 
 export default function Home() {
-  const [notification] = useNotification();
+  const [notification, contextHolder] = useNotification();
   const { data: userInfo } = useUserInfoQuery({});
 
-  console.log(userInfo);
   const [login, result] = useLoginMutation();
 
   useEffect(() => {
+    console.log(result.error);
     if (result.error) {
       notification.error({ message: "Email or password incorrect" });
     }
@@ -24,6 +24,7 @@ export default function Home() {
 
   return (
     <div>
+      {contextHolder}
       <Card title="Login" bordered={false} style={{ width: 300 }}>
         <Form
           requiredMark={false}

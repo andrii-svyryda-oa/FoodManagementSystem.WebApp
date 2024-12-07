@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { ReduxProvider } from "@/hooks/useReduxProvider";
+import { ReduxProvider } from "@/store/ReduxProvider";
 import { ConfigProvider } from "antd";
 
 const geistSans = localFont({

@@ -1,8 +1,7 @@
-import type { Metadata } from "next";
-import localFont from "next/font/local";
-import "./globals.css";
-import { ReduxProvider } from "@/hooks/useReduxProvider";
+import AuthorizedGate from "@/components/auth/authorized-gate";
+import { checkIsAuthorized } from "@/utils/auth";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 export default async function OptionalLayout({
   children,
@@ -11,7 +10,11 @@ export default async function OptionalLayout({
 }>) {
   const cookieStore = await cookies();
 
-  console.log(cookieStore.toString());
+  const isAuthorized = await checkIsAuthorized(cookieStore.toString());
 
-  return { children };
+  if (!isAuthorized) {
+    return redirect("/auth/login");
+  }
+
+  return <AuthorizedGate authRequired>{children}</AuthorizedGate>;
 }
