@@ -7,14 +7,12 @@ import { useForm } from "antd/es/form/Form";
 import useNotification from "antd/es/notification/useNotification";
 import { useEffect } from "react";
 
-export default function Home() {
+export default function LoginPage() {
   const [notification, contextHolder] = useNotification();
-  const { data: userInfo } = useUserInfoQuery({});
 
   const [login, result] = useLoginMutation();
 
   useEffect(() => {
-    console.log(result.error);
     if (result.error) {
       notification.error({ message: "Email or password incorrect" });
     }

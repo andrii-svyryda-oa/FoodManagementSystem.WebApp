@@ -1,17 +1,20 @@
 "use client";
 
 import { useUserInfoQuery } from "@/store/api/auth.api";
+import { UserRole } from "@/types/auth";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 export default function AuthorizedGate({
   children,
   authRequired,
+  requiredRoles = [],
 }: Readonly<{
   children: React.ReactNode;
   authRequired: boolean;
+  requiredRoles?: UserRole[];
 }>) {
-  const { error, isLoading } = useUserInfoQuery({});
+  const { error, isLoading, data } = useUserInfoQuery(null);
 
   const router = useRouter();
 
@@ -20,9 +23,16 @@ export default function AuthorizedGate({
       return;
     }
 
-    if (authRequired && error) {
-      router.push("/auth/login");
-      return;
+    if (authRequired) {
+      if (error) {
+        router.push("/auth/login");
+        return;
+      }
+
+      if (requiredRoles?.length && !requiredRoles.includes(data!.role)) {
+        router.push("/");
+        return;
+      }
     }
 
     if (!authRequired && !error) {

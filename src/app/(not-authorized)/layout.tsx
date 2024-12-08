@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { checkIsAuthorized } from "@/utils/auth";
+import { checkAuthentication } from "@/utils/auth.utils";
 import AuthorizedGate from "@/components/auth/authorized-gate";
 
 export default async function OptionalLayout({
@@ -10,9 +10,9 @@ export default async function OptionalLayout({
 }>) {
   const cookieStore = await cookies();
 
-  const isAuthorized = await checkIsAuthorized(cookieStore.toString());
+  const userData = await checkAuthentication(cookieStore.toString());
 
-  if (isAuthorized) {
+  if (userData) {
     return redirect("/");
   }
 

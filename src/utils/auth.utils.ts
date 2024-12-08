@@ -1,8 +1,11 @@
-export const checkIsAuthorized = async (cookies?: string) => {
+import { UserData } from "@/types/auth";
+
+export const checkAuthentication = async (
+  cookies?: string
+): Promise<UserData | null> => {
   if (!cookies) {
-    return false;
+    return null;
   }
-  console.log(process.env.NEXT_PUBLIC_WEB_API_URL);
 
   try {
     const result = await fetch(
@@ -18,11 +21,9 @@ export const checkIsAuthorized = async (cookies?: string) => {
     const userData = await result.json();
 
     if (userData.name) {
-      return true;
+      return userData;
     }
-  } catch (e) {
-    console.log(e);
-  }
+  } catch {}
 
-  return false;
+  return null;
 };

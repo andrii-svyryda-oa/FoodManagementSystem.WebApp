@@ -7,3 +7,9 @@ export type LoginPayload = {
   email: string;
   password: string;
 };
+
+export type UserData = {
+  email: string;
+  name: string;
+  role: UserRole;
+};

@@ -1,6 +1,6 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { createApiBaseOptions } from "./base.api";
-import { LoginPayload } from "@/types/auth";
+import { LoginPayload, UserData } from "@/types/auth";
 
 export const USER_INFO_TAG = "USER_INFO";
 
@@ -8,7 +8,7 @@ export const authApi = createApi({
   ...createApiBaseOptions("auth"),
   tagTypes: [USER_INFO_TAG],
   endpoints: (builder) => ({
-    userInfo: builder.query({
+    userInfo: builder.query<UserData, null>({
       query: () => ({
         url: "/user-info",
         credentials: "include",
