@@ -20,6 +20,8 @@ export const checkAuthentication = async (
 
     const userData = await result.json();
 
+    console.log(userData);
+
     if (userData.name) {
       return userData;
     }

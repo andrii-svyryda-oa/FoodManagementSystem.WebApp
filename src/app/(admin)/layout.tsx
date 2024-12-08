@@ -3,7 +3,7 @@ import { ApplicationLayout } from "@/components/layout/layout";
 import { UserRole } from "@/types/auth";
 import { checkAuthentication } from "@/utils/auth.utils";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+import { redirect, RedirectType } from "next/navigation";
 import React from "react";
 
 export default async function OptionalLayout({
@@ -25,7 +25,7 @@ export default async function OptionalLayout({
 
   return (
     <ApplicationLayout userData={userData}>
-      <AuthorizedGate authRequired>
+      <AuthorizedGate authRequired requiredRoles={[UserRole.Admin]}>
         {React.cloneElement(children, { userData })}
       </AuthorizedGate>
     </ApplicationLayout>

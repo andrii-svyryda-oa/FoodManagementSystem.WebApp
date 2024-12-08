@@ -1,15 +1,30 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { createApiBaseOptions } from "./base.api";
-import { UserBalanceUpdate, UserCreate, UserUpdate } from "@/types/user";
+import {
+  UserBalanceUpdate,
+  UserCreate,
+  UserModel,
+  UserUpdate,
+} from "@/types/user";
+import {
+  normalizeUserResponse,
+  normalizeUsersResponse,
+} from "../normalizers/user.normalizers";
+import { PaginatedData, PaginationData } from "@/types/common";
 
 export const userApi = createApi({
   ...createApiBaseOptions("users"),
   endpoints: (builder) => ({
-    getUsers: builder.query({
-      query: () => "/",
+    getUsers: builder.query<PaginatedData<UserModel>, PaginationData>({
+      query: (params: PaginationData) => ({
+        url: "/",
+        params,
+      }),
+      transformResponse: normalizeUsersResponse,
     }),
-    getUser: builder.query({
+    getUser: builder.query<UserModel, string>({
       query: (userId: string) => `/${userId}`,
+      transformResponse: normalizeUserResponse,
     }),
     addUser: builder.mutation({
       query: (newUser: UserCreate) => ({

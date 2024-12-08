@@ -36,7 +36,7 @@ export const ApplicationLayout = ({
           </div>
         </div>
       </Layout.Sider>
-      <Layout.Content className="h-screen overflow-y-auto">
+      <Layout.Content className="h-screen overflow-y-auto p-6">
         {children}
       </Layout.Content>
     </Layout>

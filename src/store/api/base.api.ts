@@ -6,5 +6,6 @@ export const createApiBaseOptions = <T>(
   reducerPath: apiName,
   baseQuery: fetchBaseQuery({
     baseUrl: `${process.env.NEXT_PUBLIC_WEB_API_URL}/${apiName}/`,
+    credentials: "include",
   }),
 });
