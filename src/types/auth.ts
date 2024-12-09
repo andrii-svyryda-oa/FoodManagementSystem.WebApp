@@ -9,7 +9,9 @@ export type LoginPayload = {
 };
 
 export type UserData = {
+  id: string;
   email: string;
   name: string;
   role: UserRole;
+  balance: number;
 };

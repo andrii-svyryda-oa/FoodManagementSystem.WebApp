@@ -34,6 +34,7 @@ export default function LoginPage() {
           <Form.Item
             label="Email"
             name="email"
+            required
             rules={[
               { required: true, message: "Please input your email!" },
               { type: "email", message: "Please enter a valid email address!" },
@@ -45,6 +46,7 @@ export default function LoginPage() {
           <Form.Item
             label="Password"
             name="password"
+            required
             rules={[{ required: true, message: "Please input your password!" }]}
           >
             <Input.Password />

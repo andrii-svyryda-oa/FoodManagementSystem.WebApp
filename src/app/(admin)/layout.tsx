@@ -26,7 +26,7 @@ export default async function OptionalLayout({
   return (
     <ApplicationLayout userData={userData}>
       <AuthorizedGate authRequired requiredRoles={[UserRole.Admin]}>
-        {React.cloneElement(children, { userData })}
+        {children}
       </AuthorizedGate>
     </ApplicationLayout>
   );
