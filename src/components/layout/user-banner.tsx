@@ -1,18 +1,9 @@
 "use client";
 
 import { useLogoutMutation } from "@/store/api/auth.api";
-import { UserData, UserRole } from "@/types/auth";
-import { Avatar, Layout, Menu, Popover } from "antd";
-import { ReactNode } from "react";
-import {
-  DollarOutlined,
-  LogoutOutlined,
-  MoneyCollectOutlined,
-  ProfileOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
-import Link from "next/link";
 import { mapMenuItem } from "@/utils/navigation.utils";
+import { UserOutlined } from "@ant-design/icons";
+import { Avatar, Menu, Popover } from "antd";
 import { profileNavigationMenuItems } from "./profile-navigation";
 
 export const UserBanner = ({

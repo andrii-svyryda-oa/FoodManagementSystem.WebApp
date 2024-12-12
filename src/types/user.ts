@@ -1,4 +1,3 @@
-import { Moment } from "moment";
 import { UserRole } from "./auth";
 
 type UserBase = {
@@ -21,6 +20,7 @@ export type UserBalanceUpdate = {
 
 export type UserModel = UserBase & {
   role: UserRole;
-  createdAt: Moment;
+  createdAt: string;
   balance: number;
+  key: string;
 };

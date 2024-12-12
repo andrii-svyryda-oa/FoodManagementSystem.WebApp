@@ -1,13 +1,11 @@
 import { useGetUsersQuery } from "@/store/api/user.api";
 import { PaginationData } from "@/types/common";
 import { UserModel } from "@/types/user";
-import { dateTimeFormat } from "@/utils/date.utils";
-import { Button, Input, Table } from "antd";
+import { Button, Table } from "antd";
 import { ColumnsType } from "antd/es/table";
-import { Moment } from "moment";
-import { useState } from "react";
-import { SearchInput } from "../search-input/search-input";
+import { useCallback, useState } from "react";
 import { AdjustUserBalanceModal } from "./modals/adjust-user-balance-modal";
+import SearchInput from "../search-input/search-input";
 
 const columns: ColumnsType<UserModel> = [
   {
@@ -45,7 +43,7 @@ enum UserAction {
   Add = "Add",
 }
 
-export const ManageUsersTable = ({}: {}) => {
+export const ManageUsersTable = () => {
   const [activeUser, setActiveUser] = useState<UserModel>();
   const [currentAction, setCurrentAction] = useState<UserAction>();
 
@@ -76,16 +74,18 @@ export const ManageUsersTable = ({}: {}) => {
     },
   ]);
 
+  const onSearchChange = useCallback(() => {
+    return (searchText: string) => {
+      setPaginationData({
+        ...paginationData,
+        searchText,
+      });
+    };
+  }, [setPaginationData, paginationData]);
+
   return (
     <>
-      <SearchInput
-        onChange={(searchText) => {
-          setPaginationData({
-            ...paginationData,
-            searchText,
-          });
-        }}
-      />
+      <SearchInput onChange={onSearchChange} />
       <Table
         loading={isLoading}
         dataSource={paginatedUsers?.data}

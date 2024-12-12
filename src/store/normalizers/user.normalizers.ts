@@ -3,7 +3,7 @@ import { UserModel } from "@/types/user";
 import { dateTimeFormat } from "@/utils/date.utils";
 import moment from "moment";
 
-export const normalizeUserResponse = (userResponse: any): UserModel => {
+export const normalizeUserResponse = (userResponse: UserModel): UserModel => {
   return {
     ...userResponse,
     key: userResponse.id,
@@ -12,7 +12,7 @@ export const normalizeUserResponse = (userResponse: any): UserModel => {
 };
 
 export const normalizeUsersResponse = (
-  usersResponse: PaginatedData<any>
+  usersResponse: PaginatedData<UserModel>
 ): PaginatedData<UserModel> => {
   return {
     ...usersResponse,

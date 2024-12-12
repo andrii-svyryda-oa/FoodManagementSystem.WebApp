@@ -3,13 +3,13 @@ import { ApplicationLayout } from "@/components/layout/layout";
 import { UserRole } from "@/types/auth";
 import { checkAuthentication } from "@/utils/auth.utils";
 import { cookies } from "next/headers";
-import { redirect, RedirectType } from "next/navigation";
+import { redirect } from "next/navigation";
 import React from "react";
 
 export default async function OptionalLayout({
   children,
 }: Readonly<{
-  children: any;
+  children: React.ReactNode;
 }>) {
   const cookieStore = await cookies();
 

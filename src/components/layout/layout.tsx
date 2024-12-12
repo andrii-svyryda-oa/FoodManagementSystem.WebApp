@@ -1,17 +1,10 @@
 "use client";
 
-import { useLogoutMutation } from "@/store/api/auth.api";
-import { UserData, UserRole } from "@/types/auth";
-import { Avatar, Layout, Menu, Popover } from "antd";
+import { UserData } from "@/types/auth";
+import { Layout } from "antd";
 import { ReactNode } from "react";
-import {
-  LogoutOutlined,
-  ProfileOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
-import Link from "next/link";
-import { UserBanner } from "./user-banner";
 import { Navigation } from "./navigation";
+import { UserBanner } from "./user-banner";
 
 export const ApplicationLayout = ({
   children,

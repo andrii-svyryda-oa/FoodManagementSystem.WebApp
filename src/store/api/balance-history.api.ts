@@ -1,8 +1,7 @@
-import { createApi } from "@reduxjs/toolkit/query/react";
-import { createApiBaseOptions } from "./base.api";
-import { PaginatedData, PaginationData } from "@/types/common";
 import { BalanceHistory } from "@/types/balance-history";
+import { createApi } from "@reduxjs/toolkit/query/react";
 import { normalizeBalanceHistoryResponse } from "../normalizers/balance-history.normalizers";
+import { createApiBaseOptions } from "./base.api";
 
 export const BALANCE_HISTORY_TAG = "Users Tag";
 

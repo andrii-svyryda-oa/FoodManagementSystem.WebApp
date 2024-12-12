@@ -1,10 +1,11 @@
 import { Input } from "antd";
+import { memo } from "react";
 
 type Props = {
   onChange: (value: string) => void;
 };
 
-export const SearchInput = ({ onChange }: Props) => {
+const SearchInput = ({ onChange }: Props) => {
   return (
     <div className="flex flex-col mb-4">
       <label className="text-lg">Search</label>
@@ -17,3 +18,5 @@ export const SearchInput = ({ onChange }: Props) => {
     </div>
   );
 };
+
+export default memo(SearchInput);
