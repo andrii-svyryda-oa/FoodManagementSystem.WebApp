@@ -1,22 +1,16 @@
-import { useGetUsersQuery } from "@/store/api/user.api";
+import { useGetRestaurantsQuery } from "@/store/api/restaurant.api";
 import { PaginationData } from "@/types/common";
-import { UserModel } from "@/types/user";
+import { RestaurantModel } from "@/types/restaurant";
 import { Button, Table } from "antd";
 import { ColumnsType } from "antd/es/table";
 import { useCallback, useState } from "react";
-import { AdjustUserBalanceModal } from "./modals/adjust-user-balance-modal";
 import SearchInput from "../common/search-input";
 
-const columns: ColumnsType<UserModel> = [
+const columns: ColumnsType<RestaurantModel> = [
   {
     key: "id",
     title: "Id",
     dataIndex: "id",
-  },
-  {
-    key: "email",
-    title: "Email",
-    dataIndex: "email",
   },
   {
     key: "name",
@@ -24,28 +18,21 @@ const columns: ColumnsType<UserModel> = [
     dataIndex: "name",
   },
   {
-    key: "balance",
-    title: "Balance",
-    dataIndex: "balance",
-    render: (value: string) => `${value} UAH`,
-  },
-  {
-    key: "createdAt",
-    title: "Created At",
-    dataIndex: "createdAt",
+    key: "description",
+    title: "Description",
+    dataIndex: "description",
   },
 ];
 
-enum UserAction {
+enum RestaurantAction {
   Delete = "Delete",
-  AdjustBalance = "AdjustBalance",
   Edit = "Edit",
   Add = "Add",
 }
 
-export const ManageUsersTable = () => {
-  const [activeUser, setActiveUser] = useState<UserModel>();
-  const [currentAction, setCurrentAction] = useState<UserAction>();
+export const ManageRestaurantsTable = () => {
+  const [activeRestaurant, setActiveRestaurant] = useState<RestaurantModel>();
+  const [currentAction, setCurrentAction] = useState<RestaurantAction>();
 
   const [paginationData, setPaginationData] = useState<PaginationData>({
     page: 1,
@@ -53,7 +40,8 @@ export const ManageUsersTable = () => {
     searchText: "",
   });
 
-  const { data: paginatedUsers, isFetching } = useGetUsersQuery(paginationData);
+  const { data: paginatedRestaurants, isFetching } =
+    useGetRestaurantsQuery(paginationData);
 
   const allColumns = columns.concat([
     {
@@ -62,12 +50,21 @@ export const ManageUsersTable = () => {
       render: (_, record) => (
         <div className="flex space-x-3">
           <Button
+            type="primary"
             onClick={() => {
-              setActiveUser(record);
-              setCurrentAction(UserAction.AdjustBalance);
+              setActiveRestaurant(record);
+              setCurrentAction(RestaurantAction.Edit);
             }}
           >
-            Adjust balance
+            Edit
+          </Button>
+          <Button
+            onClick={() => {
+              setActiveRestaurant(record);
+              setCurrentAction(RestaurantAction.Delete);
+            }}
+          >
+            Delete
           </Button>
         </div>
       ),
@@ -87,12 +84,18 @@ export const ManageUsersTable = () => {
     <>
       <div className="flex items-end justify-between mb-4">
         <SearchInput onChange={onSearchChange} />
+        <Button
+          type="primary"
+          onClick={() => setCurrentAction(RestaurantAction.Add)}
+        >
+          Add
+        </Button>
       </div>
       <Table
         loading={isFetching}
-        dataSource={paginatedUsers?.data}
+        dataSource={paginatedRestaurants?.data}
         pagination={{
-          total: paginatedUsers?.count,
+          total: paginatedRestaurants?.count,
           current: paginationData.page,
           pageSize: paginationData.pageSize,
           onChange: (page, pageSize) => {
@@ -101,11 +104,11 @@ export const ManageUsersTable = () => {
         }}
         columns={allColumns}
       />
-      <AdjustUserBalanceModal
-        open={currentAction == UserAction.AdjustBalance}
-        user={activeUser!}
+      {/* <AdjustUserBalanceModal
+        open={currentAction == RestaurantAction.Add}
+        restaurant={activeRestaurant!}
         onCancel={() => setCurrentAction(undefined)}
-      />
+      /> */}
     </>
   );
 };
