@@ -38,11 +38,11 @@ export default function AuthorizedGate({
     }
 
     if (!authRequired && data) {
-      console.log("Navigate to main page cause login");
+      console.log("Navigate to main page cause logged in");
       router.push("/");
       return;
     }
-  }, [isLoading, router]);
+  }, [isLoading, router, data]);
 
   return <>{children}</>;
 }
