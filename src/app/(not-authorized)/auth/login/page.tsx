@@ -10,13 +10,13 @@ import { useEffect } from "react";
 export default function LoginPage() {
   const [notification, contextHolder] = useNotification();
 
-  const [login, result] = useLoginMutation();
+  const [login, { error, isLoading }] = useLoginMutation();
 
   useEffect(() => {
-    if (result.error) {
+    if (error) {
       notification.error({ message: "Email or password incorrect" });
     }
-  }, [result.error]);
+  }, [error]);
 
   const [form] = useForm<LoginPayload>();
 
@@ -53,7 +53,7 @@ export default function LoginPage() {
           </Form.Item>
 
           <Form.Item>
-            <Button type="primary" htmlType="submit" block>
+            <Button loading={isLoading} type="primary" htmlType="submit" block>
               Login
             </Button>
           </Form.Item>
