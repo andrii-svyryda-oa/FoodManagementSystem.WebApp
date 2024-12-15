@@ -14,17 +14,17 @@ export default function AuthorizedGate({
   authRequired: boolean;
   requiredRoles?: UserRole[];
 }>) {
-  const { isLoading, data, isError } = useUserInfoQuery(null);
+  const { isFetching, data, error } = useUserInfoQuery(null);
 
   const router = useRouter();
 
   useEffect(() => {
-    if (isLoading) {
+    if (isFetching) {
       return;
     }
 
     if (authRequired) {
-      if (isError) {
+      if (error) {
         console.log("Navigate to login cause not logged in");
         router.push("/auth/login");
         return;
@@ -37,12 +37,12 @@ export default function AuthorizedGate({
       }
     }
 
-    if (!authRequired && !isError) {
+    if (!authRequired && !error && data) {
       console.log("Navigate to main page cause logged in");
       router.push("/");
       return;
     }
-  }, [isLoading, router, data, isError]);
+  }, [isFetching, router, data, error]);
 
   return <>{children}</>;
 }
