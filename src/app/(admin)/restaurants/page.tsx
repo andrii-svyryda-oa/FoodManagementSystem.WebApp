@@ -3,12 +3,7 @@
 export default function RestaurantsPage() {
   return (
     <>
-      <div className="h-[300px] bg-gray-100"></div>
-      <div className="h-[300px] bg-gray-200"></div>
-      <div className="h-[300px] bg-gray-300"></div>
-      <div className="h-[300px] bg-gray-400"></div>
-      <div className="h-[300px] bg-gray-500"></div>
-      <div className="h-[300px] bg-gray-600"></div>
+      <h2 className="text-3xl mt-0 mb-6">Restaurants</h2>
     </>
   );
 }
