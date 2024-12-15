@@ -14,7 +14,7 @@ export default function AuthorizedGate({
   authRequired: boolean;
   requiredRoles?: UserRole[];
 }>) {
-  const { error, isLoading, data } = useUserInfoQuery(null);
+  const { isLoading, data } = useUserInfoQuery(null);
 
   const router = useRouter();
 
@@ -25,21 +25,24 @@ export default function AuthorizedGate({
 
     if (authRequired) {
       if (!data) {
+        console.log("Navigate to login cause no data");
         router.push("/auth/login");
         return;
       }
 
       if (requiredRoles?.length && !requiredRoles.includes(data!.role)) {
+        console.log("Navigate to main page cause not enough permissions");
         router.push("/");
         return;
       }
     }
 
-    if (!authRequired && !error) {
+    if (!authRequired && data) {
+      console.log("Navigate to main page cause login");
       router.push("/");
       return;
     }
-  }, [error, isLoading, router]);
+  }, [isLoading, router]);
 
   return <>{children}</>;
 }
