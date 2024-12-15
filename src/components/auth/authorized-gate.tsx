@@ -24,7 +24,7 @@ export default function AuthorizedGate({
     }
 
     if (authRequired) {
-      if (error) {
+      if (!data) {
         router.push("/auth/login");
         return;
       }
