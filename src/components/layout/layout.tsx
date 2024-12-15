@@ -4,12 +4,8 @@ import { Layout } from "antd";
 import { ReactNode } from "react";
 import { Navigation } from "./navigation";
 import { UserBanner } from "./user-banner";
-import { useUserInfoQuery } from "@/store/api/auth.api";
-import { UserRole } from "@/types/auth";
 
 export const ApplicationLayout = ({ children }: { children: ReactNode }) => {
-  const { data: userData } = useUserInfoQuery(null);
-
   return (
     <Layout className="h-screen">
       <Layout.Sider width={300}>
@@ -19,13 +15,10 @@ export const ApplicationLayout = ({ children }: { children: ReactNode }) => {
             <p className="text-gray-400 m-0 text-lg">Food Management System</p>
           </div>
           <div className="grow pt-4">
-            <Navigation role={userData?.role ?? UserRole.User} />
+            <Navigation />
           </div>
           <div className="px-5">
-            <UserBanner
-              username={userData?.name ?? ""}
-              balance={userData?.balance ?? 0}
-            />
+            <UserBanner />
           </div>
         </div>
       </Layout.Sider>

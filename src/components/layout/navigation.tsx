@@ -1,5 +1,6 @@
 "use client";
 
+import { useUserInfoQuery } from "@/store/api/auth.api";
 import { UserRole } from "@/types/auth";
 import { getFilteredMenuItems, mapMenuItem } from "@/utils/navigation.utils";
 import {
@@ -7,7 +8,7 @@ import {
   ShopOutlined,
   ShoppingCartOutlined,
 } from "@ant-design/icons";
-import { Menu } from "antd";
+import { Menu, Spin } from "antd";
 import { usePathname } from "next/navigation";
 
 const menuItems = [
@@ -30,15 +31,21 @@ const menuItems = [
   },
 ];
 
-export const Navigation = ({ role }: { role: UserRole }) => {
+export const Navigation = () => {
   const pathname = usePathname();
+  const { isLoading, data: userData } = useUserInfoQuery(null);
 
   return (
-    <Menu
-      theme="dark"
-      className="!text-base"
-      selectedKeys={[pathname]}
-      items={getFilteredMenuItems(menuItems, role).map(mapMenuItem)}
-    />
+    <Spin spinning={isLoading}>
+      <Menu
+        theme="dark"
+        className="!text-base"
+        selectedKeys={[pathname]}
+        items={getFilteredMenuItems(
+          menuItems,
+          userData?.role ?? UserRole.User
+        ).map(mapMenuItem)}
+      />
+    </Spin>
   );
 };
