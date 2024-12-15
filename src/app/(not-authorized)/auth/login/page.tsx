@@ -1,6 +1,6 @@
 "use client";
 
-import { LoginCard } from "@/components/auth/logic-card";
+import { LoginCard } from "@/components/auth/login-card";
 
 export default function LoginPage() {
   return <LoginCard />;
