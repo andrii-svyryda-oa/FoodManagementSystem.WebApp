@@ -14,7 +14,7 @@ export default function AuthorizedGate({
   authRequired: boolean;
   requiredRoles?: UserRole[];
 }>) {
-  const { isLoading, data } = useUserInfoQuery(null);
+  const { isLoading, data, isError } = useUserInfoQuery(null);
 
   const router = useRouter();
 
@@ -24,8 +24,8 @@ export default function AuthorizedGate({
     }
 
     if (authRequired) {
-      if (!data) {
-        console.log("Navigate to login cause no data");
+      if (isError) {
+        console.log("Navigate to login cause not logged in");
         router.push("/auth/login");
         return;
       }
@@ -37,12 +37,12 @@ export default function AuthorizedGate({
       }
     }
 
-    if (!authRequired && data) {
+    if (!authRequired && !isError) {
       console.log("Navigate to main page cause logged in");
       router.push("/");
       return;
     }
-  }, [isLoading, router, data]);
+  }, [isLoading, router, data, isError]);
 
   return <>{children}</>;
 }
