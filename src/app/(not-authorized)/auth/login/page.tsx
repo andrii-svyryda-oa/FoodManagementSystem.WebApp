@@ -1,6 +1,6 @@
 "use client";
 
-import { useLoginMutation, useUserInfoQuery } from "@/store/api/auth.api";
+import { useLoginMutation } from "@/store/api/auth.api";
 import { LoginPayload } from "@/types/auth";
 import { Button, Card, Form, Input } from "antd";
 import { useForm } from "antd/es/form/Form";

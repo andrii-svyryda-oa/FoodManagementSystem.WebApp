@@ -15,7 +15,7 @@ export const AdjustUserBalanceModal = ({ user, ...modalProps }: Props) => {
   const [notification, contextHolder] = useNotification();
 
   const { refetch: refetchBalanceHistory } = useGetBalanceHistoryQuery(null);
-  const { data: userData } = useUserInfoQuery(null);
+  const { data: userData, refetch: refetchUserInfo } = useUserInfoQuery(null);
 
   const [updateUserBalance, { isLoading, isError }] =
     useUpdateUserBalanceMutation();
@@ -37,8 +37,8 @@ export const AdjustUserBalanceModal = ({ user, ...modalProps }: Props) => {
         modalProps.onCancel?.(e);
 
         if (user.id == userData!.id) {
-          console.log("same user, refetching");
           refetchBalanceHistory();
+          refetchUserInfo();
         }
       }
     } catch {}

@@ -3,7 +3,7 @@ import { dateTimeFormat } from "@/utils/date.utils";
 import moment from "moment";
 
 export const normalizeBalanceHistoryResponse = (
-  userResponse: any[]
+  userResponse: BalanceHistory[]
 ): BalanceHistory[] => {
   return userResponse.map((history) => ({
     ...history,

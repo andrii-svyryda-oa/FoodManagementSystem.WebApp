@@ -5,7 +5,7 @@ import ProfileNavigation from "@/components/layout/profile-navigation";
 export default async function OptionalLayout({
   children,
 }: Readonly<{
-  children: any;
+  children: React.ReactNode;
 }>) {
   return (
     <div>
