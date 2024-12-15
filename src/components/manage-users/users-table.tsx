@@ -5,7 +5,7 @@ import { Button, Table } from "antd";
 import { ColumnsType } from "antd/es/table";
 import { useCallback, useState } from "react";
 import { AdjustUserBalanceModal } from "./modals/adjust-user-balance-modal";
-import SearchInput from "../search-input/search-input";
+import SearchInput from "../common/search-input";
 
 const columns: ColumnsType<UserModel> = [
   {
