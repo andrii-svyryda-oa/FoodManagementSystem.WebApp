@@ -7,7 +7,7 @@ type Props = {
 
 const SearchInput = ({ onChange }: Props) => {
   return (
-    <div className="flex flex-col mb-4">
+    <div className="flex flex-col">
       <label className="text-lg">Search</label>
       <Input
         className="w-[250px]"
