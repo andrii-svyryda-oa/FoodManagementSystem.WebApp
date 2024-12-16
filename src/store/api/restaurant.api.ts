@@ -1,21 +1,11 @@
-import { createApi } from "@reduxjs/toolkit/query/react";
-import { createApiBaseOptions } from "./base.api";
-import {
-  UserBalanceUpdate,
-  UserCreate,
-  UserModel,
-  UserUpdate,
-} from "@/types/user";
-import {
-  normalizeUserResponse,
-  normalizeUsersResponse,
-} from "../normalizers/user.normalizers";
 import { PaginatedData, PaginationData } from "@/types/common";
 import {
   RestaurantCreate,
   RestaurantModel,
   RestaurantUpdate,
 } from "@/types/restaurant";
+import { createApi } from "@reduxjs/toolkit/query/react";
+import { createApiBaseOptions } from "./base.api";
 
 const RESTAURANTS_TAG = "Restaurants Tag";
 

@@ -34,6 +34,8 @@ export const ManageRestaurantsTable = () => {
   const [activeRestaurant, setActiveRestaurant] = useState<RestaurantModel>();
   const [currentAction, setCurrentAction] = useState<RestaurantAction>();
 
+  console.log(activeRestaurant, currentAction);
+
   const [paginationData, setPaginationData] = useState<PaginationData>({
     page: 1,
     pageSize: 10,

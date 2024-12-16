@@ -1,7 +1,7 @@
 export type RestaurantBase = {
-  id: String;
-  name: String;
-  description: String;
+  id: string;
+  name: string;
+  description: string;
 };
 
 export type RestaurantCreate = RestaurantBase & {};
